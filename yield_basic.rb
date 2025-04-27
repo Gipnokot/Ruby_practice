@@ -1,13 +1,13 @@
-def repeat(times)
-  unless times.is_a?(Integer) && times.positive?
-    raise ArgumentError, "Times must be a positive integer"
-  end
+def each_word(string)
+  raise ArgumentError, "Argument must be a non-empty string" unless string.is_a?(String) && !string.strip.empty?
 
   if block_given?
-    times.times { yield }
+    string.split.each do |word|
+      yield(word)
+    end
   else
-    puts 'No block given'
+    puts "No block given"
   end
 end
 
-repeat(10) { puts "Hello world!" }
+each_word("Hello great world") { |word| puts word.upcase }
